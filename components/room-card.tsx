@@ -1,12 +1,11 @@
 import { ArrowUpRight, BedDouble, Maximize2, Users } from 'lucide-react';
-import Link from 'next/link';
 import { money, type Room } from '@/lib/hotel-data';
 import { HotelImage } from '@/components/hotel-image';
 
 export function RoomCard({ room }: { room: Room }) {
   return (
     <article className="group">
-      <Link href={`/rooms/${room.slug}`} className="relative block aspect-[4/3] overflow-hidden bg-[#ded8ce]">
+      <a href={`/rooms/${room.slug}`} className="relative block aspect-[4/3] overflow-hidden bg-[#ded8ce]">
         <HotelImage
           src={room.images[0]}
           alt={`${room.name} interior`}
@@ -18,7 +17,7 @@ export function RoomCard({ room }: { room: Room }) {
           {room.available ? 'Available' : 'Next available 3 Sep'}
         </span>
         <span className="absolute bottom-4 right-4 grid h-11 w-11 place-items-center bg-white text-[#18231f]"><ArrowUpRight size={18} /></span>
-      </Link>
+      </a>
       <div className="border-b border-[#18231f]/20 py-5">
         <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
           <h3 className="font-serif text-3xl">{room.name}</h3>

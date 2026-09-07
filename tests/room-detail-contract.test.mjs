@@ -25,7 +25,8 @@ test('room detail pages retain required content and booking navigation', () => {
 
 test('room cards enter detail routes and ordinary browser history remains available to leave them', () => {
   assert.ok(roomCardSource.includes('href={`/rooms/${room.slug}`}'));
-  assert.ok(roomCardSource.includes("from 'next/link'"));
+  assert.ok(roomCardSource.includes('<a href={`/rooms/${room.slug}`}'));
+  assert.ok(!roomCardSource.includes("from 'next/link'"));
   assert.ok(shellSource.includes('href="/"'));
   assert.ok(!gallerySource.includes('pushState'));
   assert.ok(!gallerySource.includes('replaceState'));
