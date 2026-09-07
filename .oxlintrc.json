@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["nextjs", "jsx-a11y"],
+  "ignorePatterns": ["components/ui/**", "hooks/**"],
+  "rules": {
+    "nextjs/no-img-element": "off",
+    "nextjs/no-html-link-for-pages": "off",
+    "jsx-a11y/label-has-associated-control": "off"
+  }
+}
