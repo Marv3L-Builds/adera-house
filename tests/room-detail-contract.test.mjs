@@ -36,6 +36,8 @@ test('route-dependent gallery and image state reset when the room changes', () =
   assert.ok(detailSource.includes('<main key={room.slug}>'));
   assert.ok(detailSource.includes('<RoomGallery key={room.slug}'));
   assert.ok(imageSource.includes('status.src === src'));
+  assert.ok(imageSource.includes('imageRef.current'));
+  assert.ok(imageSource.includes('image?.complete'));
   assert.ok(imageSource.includes("setStatus({ src, state: 'loaded' })"));
   assert.ok(imageSource.includes("setStatus({ src, state: 'failed' })"));
 });

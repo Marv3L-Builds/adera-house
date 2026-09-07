@@ -2,7 +2,7 @@
 
 import { ImageOff } from 'lucide-react';
 import type { CSSProperties } from 'react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type ImageStatus = { src: string; state: 'loading' | 'loaded' | 'failed' };
 
@@ -18,13 +18,21 @@ type HotelImageProps = {
 
 export function HotelImage({ src, alt, className = '', imageClassName = '', imageStyle, eager = false, sizes = '100vw' }: HotelImageProps) {
   const [status, setStatus] = useState<ImageStatus>({ src, state: 'loading' });
+  const imageRef = useRef<HTMLImageElement>(null);
   const loaded = status.src === src && status.state === 'loaded';
   const failed = status.src === src && status.state === 'failed';
+
+  useEffect(() => {
+    const image = imageRef.current;
+    if (!image?.complete) return;
+    setStatus({ src, state: image.naturalWidth > 0 ? 'loaded' : 'failed' });
+  }, [src]);
 
   return (
     <span className={`relative block overflow-hidden bg-[#d9d2c7] ${className}`}>
       {!failed && (
         <img
+          ref={imageRef}
           src={src}
           srcSet={src.includes('images.unsplash.com') ? [640, 960, 1400, 2200].map(width => `${src.replace(/w=\d+/, `w=${width}`)} ${width}w`).join(', ') : undefined}
           sizes={sizes}
